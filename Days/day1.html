@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacked Minimal Avatars</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #0f0f0f;
+      font-family: "Inter", sans-serif;
+      overflow: hidden;
+    }
+
+    .stack {
+      display: flex;
+      position: relative;
+    }
+
+    .profile {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      margin-left: -30px; /* overlap avatars */
+      z-index: 1;
+      transition: transform 0.4s ease;
+    }
+
+    .profile:first-child {
+      margin-left: 0;
+    }
+
+    /* Avatar */
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #2a2a2a;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      z-index: 2;
+      background: #1a1a1a;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Expanding Card */
+    .card {
+      position: absolute;
+      top: 50px; /* adjusts for smaller avatar */
+      width: 240px;
+      height: 0;
+      border-radius: 16px;
+      background: rgba(30, 30, 30, 0.95);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.5s ease;
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    .profile:hover .card {
+      height: 160px;
+      opacity: 1;
+    }
+
+    .profile:hover .avatar {
+      transform: scale(1.08);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+    }
+
+    /* Card content */
+    .card h3 {
+      margin: 10px 0 5px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #f0f0f0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease 0.2s;
+    }
+
+    .card p {
+      margin: 0;
+      padding: 0 20px;
+      font-size: 13px;
+      color: #b0b0b0;
+      line-height: 1.4;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease 0.3s;
+    }
+
+    .profile:hover .card h3,
+    .profile:hover .card p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stacked hover effect: fan out */
+    .stack:hover .profile:nth-child(1) {
+      transform: translateX(-35px);
+      z-index: 3;
+    }
+
+    .stack:hover .profile:nth-child(2) {
+      transform: translateY(-10px);
+      z-index: 4;
+    }
+
+    .stack:hover .profile:nth-child(3) {
+      transform: translateX(35px);
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+  <div class="stack">
+    <div class="profile">
+      <div class="avatar">
+        <img src="https://i.pravatar.cc/300?img=12" alt="Avatar">
+      </div>
+      <div class="card">
+        <h3>Alex Morgan</h3>
+        <p>Product designer & minimalist enthusiast. Loves building simple, thoughtful experiences.</p>
+      </div>
+    </div>
+
+    <div class="profile">
+      <div class="avatar">
+        <img src="https://i.pravatar.cc/300?img=32" alt="Avatar">
+      </div>
+      <div class="card">
+        <h3>Sophia Lee</h3>
+        <p>Frontend engineer who crafts smooth, elegant UI interactions with love.</p>
+      </div>
+    </div>
+
+    <div class="profile">
+      <div class="avatar">
+        <img src="https://i.pravatar.cc/300?img=45" alt="Avatar">
+      </div>
+      <div class="card">
+        <h3>Daniel Kim</h3>
+        <p>Project lead with a focus on clarity, structure, and simple workflows.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
